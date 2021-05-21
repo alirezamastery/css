@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./style.css" rel="stylesheet" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="header-bar-mobile">
+    <a href="index.html" class="mr-7">
+      <img alt="Logo" src="trade_x_assets/images/logo.png" class="max-h-30px" />
+    </a>
+    <div id="mobile-menu-toggle">
+      ppp
+    </div>
+  </div>
+  <div class="mobile-header-content">
+
+  </div>
+</body>
+<script>
+  function toggleClassMenu() {
+    myMenu.classList.add("menu--animatable");
+    if (!myMenu.classList.contains("menu--visible")) {
+      myMenu.classList.add("menu--visible");
+    } else {
+      myMenu.classList.remove('menu--visible');
+    }
+  }
+
+  function OnTransitionEnd() {
+    myMenu.classList.remove("menu--animatable");
+  }
+
+  // const myMenu = document.querySelector(".menu");
+  // const oppMenu = document.querySelector(".menu-icon");
+  // myMenu.addEventListener("transitionend", OnTransitionEnd, false);
+  // myMenu.addEventListener("click", toggleClassMenu, false);
+  // oppMenu.addEventListener("click", toggleClassMenu, false);
+
+  const mobileMenu = document.querySelector('.mobile-header-content')
+  const mobileMenutBtn = document.getElementById('mobile-menu-toggle')
+  mobileMenutBtn.addEventListener('click', () => {
+    if (mobileMenu.classList.contains('show'))
+      mobileMenu.classList.remove('show')
+    else
+      mobileMenu.classList.add('show')
+  })
+</script>
+
+</html>

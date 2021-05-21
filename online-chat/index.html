@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="main2.css" rel="stylesheet" />
+  <script src="./js/jquery-3.6.0.min.js" defer></script>
+  <script src="./js/jquery-ui.min.js" defer></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box"></div>
+
+  <div style="height: 5000px;"></div>
+
+  <!-- <div class="chat-container"> -->
+  <div id="chatBtn" class="chat-btn">
+    online chat
+  </div>
+  <div class="chat-header"></div>
+  <div id="chatArea" class="chat-area">
+    <div class="chat-content">
+      <div id="closeChat" class="close-chat">close</div>
+      <p>
+        som chate here
+      </p>
+      <p>
+        som chate here
+      </p>
+      <p>
+        som chate here
+      </p>
+      <p>
+        som chate here
+      </p>
+      <p>
+        som chate here
+      </p>
+      <p>
+        som chate here
+      </p>
+      <p>
+        som chate here
+      </p>
+    </div>
+  </div>
+  <!-- </div> -->
+
+  </div>
+
+  <script defer>
+    const chatBtn = document.getElementById('chatBtn')
+    const chatArea = document.getElementById('chatArea')
+    const closeChat = document.getElementById('closeChat')
+    const chatContent = document.querySelector('.chat-content')
+    const box = document.querySelector('.box')
+
+    box.addEventListener('click', ()=>{
+      box.classList.add('shrink')
+    })
+    box.addEventListener('transitionend',()=>{
+      box.classList.remove('shrink')
+    })
+
+    //this function hides the elementTarget when user clicks outside of elementSafeArea
+    function hideOnClickOutside(elementSafeArea, elementTarget, toggler = null, closeBtn = null) {
+      const outsideClickListener = event => {
+        if (
+          (!elementSafeArea.contains(event.target) && isVisible(elementSafeArea)) ||
+          (!!closeBtn && event.target === closeBtn)
+        ) {
+          handleSize()
+          if (toggler) {
+            showToggler(toggler)
+          }
+          removeClickListener();
+        }
+      }
+
+      const showToggler = (element) => {
+        element.classList.remove('display-none')
+        element.classList.remove('scale-down')
+        element.classList.add('scale-up')
+      }
+
+      const removeClickListener = () => {
+        document.removeEventListener('click', outsideClickListener);
+      }
+
+      document.addEventListener('click', outsideClickListener);
+    }
+
+    //this function checks visibility of the given element
+    const isVisible = elem => !!elem && !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
+
+    function handleSize() {
+      const $box = $(document.getElementById('chatArea'));
+      if ($box.hasClass("show")) {  // 'show' is just a name. we don't have 'show' class
+        // chatContent.classList.remove('fade-in')
+        chatContent.classList.add('fade-out')
+        chatArea.classList.add('fade-out')
+        $box.removeClass("show");
+        $box.animate({ width: 'toggle', height: 'toggle' }, {
+          duration: 300,
+          easing: 'linear'
+        });
+      } else {
+        $box.addClass("show");
+        $box.removeClass("fade-out");
+        $box.delay(300).animate({ width: 'toggle', height: 'toggle' }, {
+          duration: 400,
+          complete: () => {
+            chatContent.classList.add('fade-in')
+            chatContent.classList.remove('fade-out')
+          },
+          easing: 'easeOutExpo'
+        });
+      }
+    }
+
+    chatBtn.addEventListener('click', event => {
+      event.stopPropagation()
+      handleSize()
+      chatBtn.classList.add('scale-down')
+      chatBtn.classList.remove('scale-up')
+      // delay for not acting during animation
+      // setTimeout(() => hideOnClickOutside(chatArea, chatArea, chatBtn, closeChat), 500)
+      hideOnClickOutside(chatArea, chatArea, chatBtn, closeChat)
+    })
+
+  </script>
+</body>
+
+</html>

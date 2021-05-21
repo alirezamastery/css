@@ -1,0 +1,147 @@
+:root {
+  --clr-neon: hsl(310 100% 54%);
+  --clr-bg: hsl(323 21% 16%);
+  --opacity-transform-duration:100ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--clr-bg);
+  font-family: "Balsamiq Sans", cursive;
+  color: var(--clr-neon);
+  padding-right: 10rem;
+  overflow: hidden;
+}
+
+.red {
+  --clr-neon: hsl(0 100% 54%);
+}
+
+.yellow {
+  --clr-neon: hsl(50 100% 54%);
+}
+
+.green {
+  --clr-neon: hsl(100 100% 54%);
+}
+
+.cyan {
+  --clr-neon: hsl(170 100% 54%);
+}
+
+.blue {
+  --clr-neon: hsl(230 100% 54%);
+}
+
+.neon-button {
+  font-size: 2rem;
+  margin: 5rem;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--clr-neon);
+  border: var(--clr-neon) 0.125em solid;
+  padding: 0.25em 1em;
+  border-radius: 0.25em;
+
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
+
+  box-shadow: inset 0 0 0.5em 0 var(--clr-neon), 0 0 0.5em 0 var(--clr-neon);
+
+  position: relative;
+}
+
+.neon-button::before {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  background: var(--clr-neon);
+  top: 120%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  transform: perspective(1em) rotateX(70deg) scale(1, 0.35);
+  filter: blur(1em);
+  opacity: 0.7;
+  transition: all var(--opacity-transform-duration) linear;
+}
+
+.neon-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 2em 0.5em var(--clr-neon);
+  opacity: 0;
+  background-color: var(--clr-neon);
+  z-index: -1;
+  transition: all var(--opacity-transform-duration) linear;
+}
+
+.neon-button:hover,
+.neon-button:focus {
+  color: var(--clr-bg);
+  text-shadow: none;
+}
+
+.neon-button:hover::before,
+.neon-button:focus::before {
+  opacity: 1;
+  transform: perspective(1em) rotateX(70deg) scale(1, 0.45);
+}
+
+.neon-button:hover::after,
+.neon-button:focus::after {
+  opacity: 1;
+}
+
+.object {
+  position: absolute;
+  left: 45%;
+  top: 70%;
+  color: #111;
+  font-size: 4rem;
+  font-family: Roboto;
+  transition: color var(--opacity-transform-duration) linear;
+}
+
+.object::before {
+  position: absolute;
+  font-family: Roboto;
+  font-weight: 700;
+  pointer-events: none;
+  content: "O";
+  color: black;
+  background: transparent;
+  top: 2.2rem;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  transform: perspective(1em) rotateX(65deg) scale(1.1, 1.9);
+  filter: blur(0.1em);
+  opacity: 0.7;
+  transition: all var(--opacity-transform-duration) linear;
+}
+
+.neon-button:hover + .object,
+.neon-button:focus + .object {
+  color: black;
+}
+.neon-button:hover + .object::before,
+.neon-button:focus + .object::before {
+  transform: perspective(1em) rotateX(65deg) scale(1.1, 2.5);
+  filter: blur(0.08em);
+  opacity: 1;
+}

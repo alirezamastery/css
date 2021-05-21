@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="main.css" rel="stylesheet" />
+  <script src="./js/jquery-3.6.0.min.js" defer></script>
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="card">
+    <div class="card-content">
+      <h2 class="card-title">
+        some header
+      </h2>
+      <p class="card-body">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque, asperiores.
+      </p>
+      <a href="#" class="button">learn more</a>
+    </div>
+  </div>
+
+  <div class="chat-container">
+    <div id="chatBtn" class="chat-btn">
+      online chat
+    </div>
+    <div class="chat-header"></div>
+    <div id="chatArea" class="chat-area display-none">
+      <p>
+        som chate here
+      </p>
+      <p>
+        som chate here
+      </p>
+      <p>
+        som chate here
+      </p>
+      <p>
+        som chate here
+      </p>
+      <p>
+        som chate here
+      </p>
+      <p>
+        som chate here
+      </p>
+      <p>
+        som chate here
+      </p>
+    </div>
+  </div>
+
+  
+
+  </div>
+
+  <script defer>
+    const chatBtn = document.getElementById('chatBtn')
+    const chatArea = document.getElementById('chatArea')
+
+    //this function hides the elementTarget when user clicks outside of elementSafeArea
+    function hideOnClickOutside(elementSafeArea, elementTarget, toggler = null) {
+      const outsideClickListener = event => {
+        if (!elementSafeArea.contains(event.target) && isVisible(elementSafeArea)) {
+          console.log('in hideOnClickOutside')
+          elementTarget.classList.remove('slide-up')
+          // elementTarget.classList.remove('display-block')
+          // elementTarget.classList.add('display-none')
+          if (toggler) {
+            toggler.classList.remove('display-none')
+            toggler.classList.remove('scale-down')
+            toggler.classList.add('scale-up')
+            // toggler.classList.add('scale-in')
+          }
+          removeClickListener();
+        }
+      }
+
+      const removeClickListener = () => {
+        document.removeEventListener('click', outsideClickListener);
+      }
+
+      document.addEventListener('click', outsideClickListener);
+    }
+
+    //this function checks visibility of the given element
+    const isVisible = elem => !!elem && !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
+
+    function toggleChat() {
+      if (chatArea.classList.contains('display-none')) {
+        console.log('has')
+        chatArea.classList.remove('display-none')
+        chatArea.classList.add('display-block')
+        chatBtn.classList.add('display-none')
+        hideOnClickOutside(chatArea, chatArea, chatBtn);
+      }
+    }
+
+    chatBtn.addEventListener('click', event => {
+      event.stopPropagation()
+      // toggleChat()
+      chatBtn.classList.add('scale-down') 
+      chatBtn.classList.remove('scale-up') 
+      chatArea.classList.add('slide-up')
+      hideOnClickOutside(chatArea, chatArea, chatBtn);
+    })
+
+    // chatBtn.addEventListener('transitionend', () => {
+    //   if (chatBtn.classList.contains('scale-down')) {
+    //     event.stopPropagation()
+    //     toggleChat()
+    //   }
+    // })
+
+  </script>
+</body>
+
+</html>
