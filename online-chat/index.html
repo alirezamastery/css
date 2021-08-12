@@ -49,8 +49,6 @@
   </div>
   <!-- </div> -->
 
-  </div>
-
   <script defer>
     const chatBtn = document.getElementById('chatBtn')
     const chatArea = document.getElementById('chatArea')
@@ -58,10 +56,10 @@
     const chatContent = document.querySelector('.chat-content')
     const box = document.querySelector('.box')
 
-    box.addEventListener('click', ()=>{
+    box.addEventListener('click', () => {
       box.classList.add('shrink')
     })
-    box.addEventListener('transitionend',()=>{
+    box.addEventListener('transitionend', () => {
       box.classList.remove('shrink')
     })
 
